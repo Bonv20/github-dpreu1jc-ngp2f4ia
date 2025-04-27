@@ -9,10 +9,11 @@ import { StroopChallengeGame } from '../../components/games/stroop-challenge';
 import { PatternMemoryGame } from '../../components/games/pattern-memory';
 import { MathBlitzGame } from '../../components/games/math-blitz';
 import { AnagramsGame } from '../../components/games/anagrams';
+import { CardFlipMnemonicsGame } from '../../components/games/card-flip-mnemonics';
 
 const { width } = Dimensions.get('window');
 
-type GameType = 'numbers' | 'words' | 'stroop' | 'pattern' | 'math' | 'anagrams' | null;
+type GameType = 'numbers' | 'words' | 'stroop' | 'pattern' | 'math' | 'anagrams' | 'cards' | null;
 
 const GAMES_BANNER = 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
@@ -87,6 +88,16 @@ const GAMES: GameCard[] = [
     image: 'https://images.pexels.com/photos/267669/pexels-photo-267669.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     difficulty: 'Medium',
     timeLimit: '60 sec'
+  },
+  {
+    id: 'cards',
+    title: 'Card Flip Mnemonics',
+    description: 'Match related concepts through words, images, and hints',
+    icon: <Grid size={32} color="#ffffff" />,
+    gradient: ['#6366F1', '#8B5CF6'],
+    image: 'https://images.pexels.com/photos/1591061/pexels-photo-1591061.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    difficulty: 'Medium',
+    timeLimit: '90 sec'
   }
 ];
 
@@ -99,6 +110,7 @@ export default function GamesScreen() {
   if (selectedGame === 'pattern') return <PatternMemoryGame />;
   if (selectedGame === 'math') return <MathBlitzGame />;
   if (selectedGame === 'anagrams') return <AnagramsGame />;
+  if (selectedGame === 'cards') return <CardFlipMnemonicsGame />;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -249,7 +261,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor:  'rgba(255,255,255,0.2)',
     justifyContent: 'center',
     alignItems: 'center',
   },
