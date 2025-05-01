@@ -6,13 +6,13 @@ import { Brain, Zap, Trophy, Crown, Flame } from 'lucide-react-native';
 const { width } = Dimensions.get('window');
 const BRAIN_LOGO = 'https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
-// Mock data for streak
+// Initialize streak data for new users
 const MOCK_STREAK = {
-  current: 7,
-  longest: 14,
-  lastLogin: '2024-02-20',
+  current: 0,
+  longest: 0,
+  lastLogin: new Date().toISOString().split('T')[0],
   milestones: [3, 7, 14, 30, 60, 90],
-  nextMilestone: 14,
+  nextMilestone: 3,
 };
 
 export default function HomeScreen() {

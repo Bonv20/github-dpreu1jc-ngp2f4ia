@@ -8,22 +8,18 @@ import { BeltDisplay } from '../../components/belt-system/belt-rank';
 const { width } = Dimensions.get('window');
 
 const MOCK_DATA = {
-  totalScore: 2750,
-  totalGamesPlayed: 247,
-  averageScore: 85,
-  timeSpent: '12h 30m',
-  highestStreak: 15,
+  totalScore: 0,
+  totalGamesPlayed: 0,
+  averageScore: 0,
+  timeSpent: '0h 0m',
+  highestStreak: 0,
   gamesBreakdown: {
-    numberMemory: { played: 82, avgScore: 88, bestScore: 12 },
-    wordMemory: { played: 65, avgScore: 82, bestScore: 15 },
-    stroopChallenge: { played: 55, avgScore: 78, bestScore: 42 },
-    patternMemory: { played: 45, avgScore: 92, bestScore: 16 },
+    numberMemory: { played: 0, avgScore: 0, bestScore: 0 },
+    wordMemory: { played: 0, avgScore: 0, bestScore: 0 },
+    stroopChallenge: { played: 0, avgScore: 0, bestScore: 0 },
+    patternMemory: { played: 0, avgScore: 0, bestScore: 0 },
   },
-  recentAchievements: [
-    { title: 'Memory Master', description: 'Complete 50 memory games', icon: Brain },
-    { title: 'Perfect Streak', description: '10 perfect scores in a row', icon: Zap },
-    { title: 'Word Wizard', description: 'Remember 100 words correctly', icon: Crown },
-  ],
+  recentAchievements: [],
 };
 
 export default function StatsScreen() {
@@ -138,21 +134,28 @@ export default function StatsScreen() {
         >
           <Text style={styles.sectionTitle}>Recent Achievements</Text>
           <View style={styles.achievements}>
-            {MOCK_DATA.recentAchievements.map((achievement, index) => {
-              const Icon = achievement.icon;
-              return (
-                <View key={index} style={styles.achievementCard}>
-                  <View style={styles.achievementIcon}>
-                    <Icon size={24} color="#0088ff" />
+            {MOCK_DATA.recentAchievements.length === 0 ? (
+              <View style={styles.emptyState}>
+                <Medal size={48} color="#cccccc" />
+                <Text style={styles.emptyStateText}>Play games to earn achievements!</Text>
+              </View>
+            ) : (
+              MOCK_DATA.recentAchievements.map((achievement, index) => {
+                const Icon = achievement.icon;
+                return (
+                  <View key={index} style={styles.achievementCard}>
+                    <View style={styles.achievementIcon}>
+                      <Icon size={24} color="#0088ff" />
+                    </View>
+                    <View style={styles.achievementInfo}>
+                      <Text style={styles.achievementTitle}>{achievement.title}</Text>
+                      <Text style={styles.achievementDescription}>{achievement.description}</Text>
+                    </View>
+                    <Medal size={20} color="#ffd700" />
                   </View>
-                  <View style={styles.achievementInfo}>
-                    <Text style={styles.achievementTitle}>{achievement.title}</Text>
-                    <Text style={styles.achievementDescription}>{achievement.description}</Text>
-                  </View>
-                  <Medal size={20} color="#ffd700" />
-                </View>
-              );
-            })}
+                );
+              })
+            )}
           </View>
         </Animated.View>
       </ScrollView>
@@ -318,5 +321,17 @@ const styles = StyleSheet.create({
   achievementDescription: {
     fontSize: 14,
     color: '#666666',
+  },
+  emptyState: {
+    alignItems: 'center',
+    padding: 32,
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
+  },
+  emptyStateText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: '#666666',
+    textAlign: 'center',
   },
 });
